@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}AuthVault - Secure Authentication System{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; text-align: center; padding: 2rem 1rem;">
+  <div style="display: inline-block; padding: 0.4rem 1.2rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 50px; color: var(--primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;">
+    🔐 Production-Grade Security Architecture
+  </div>
+
+  <h1 style="font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.25rem; background: linear-gradient(135deg, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    Secure User Authentication & Session Management
+  </h1>
+
+  <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem;">
+    A modern web application built with Python Flask, SQLite, and Werkzeug security. Demonstrates password salted hashing, CSRF tokens, session control, and ORM query parameterization.
+  </p>
+
+  <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem;">
+    <a href="{{ url_for('main.register') }}" class="btn-primary" style="width: auto; padding: 0.9rem 2.2rem; text-decoration: none; display: inline-block;">
+      Create Account
+    </a>
+    <a href="{{ url_for('main.login') }}" class="nav-link" style="padding: 0.9rem 2.2rem; border: 1px solid var(--bg-card-border); background: var(--bg-card);">
+      Sign In
+    </a>
+  </div>
+
+  <!-- Feature Grid -->
+  <div class="dashboard-grid" style="text-align: left;">
+    <div class="stat-card">
+      <div class="stat-icon">🔑</div>
+      <div class="stat-info">
+        <h3>Salted Hashing</h3>
+        <p>Scrypt / PBKDF2</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🛡️</div>
+      <div class="stat-info">
+        <h3>CSRF Protection</h3>
+        <p>Flask-WTF Tokens</p>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-info">
+        <h3>SQL Injection Safe</h3>
+        <p>SQLAlchemy ORM</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

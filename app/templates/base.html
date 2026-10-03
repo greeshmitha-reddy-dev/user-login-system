@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure User Authentication & Session Management System in Python Flask">
+  <title>{% block title %}User Auth System{% endblock %}</title>
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="main-nav">
+    <a href="{{ url_for('main.index') }}" class="nav-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      AuthVault
+    </a>
+    
+    <ul class="nav-links">
+      {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('main.dashboard') }}" class="nav-link">Dashboard</a></li>
+        <li><a href="{{ url_for('main.profile') }}" class="nav-link">Profile</a></li>
+        <li><a href="{{ url_for('main.logout') }}" class="nav-link nav-btn">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('main.login') }}" class="nav-link">Log In</a></li>
+        <li><a href="{{ url_for('main.register') }}" class="nav-link nav-btn">Get Started</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+
+  <!-- Main Content Wrapper -->
+  <main class="main-content">
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+      <!-- Flash Messages Toast -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-messages">
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                <span>{{ message }}</span>
+                <button type="button" class="alert-close">&times;</button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>AuthVault — Python Flask Secure Authentication System &copy; 2026. Designed for technical interviews & GitHub portfolio.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

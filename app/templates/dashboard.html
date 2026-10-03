@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AuthVault{% endblock %}
+
+{% block content %}
+<div style="width: 100%; max-width: 900px;">
+  
+  <!-- Welcome Banner -->
+  <div class="card" style="margin-bottom: 2rem; border-left: 4px solid var(--primary);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <span class="badge">Authenticated Session</span>
+        <h1 style="font-family: 'Outfit', sans-serif; font-size: 2rem; margin-top: 0.5rem;">
+          Welcome back, {{ current_user.username }}! 👋
+        </h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Account Email: <strong style="color: var(--text-main);">{{ current_user.email }}</strong>
+        </p>
+      </div>
+
+      <div>
+        <a href="{{ url_for('main.profile') }}" class="nav-link nav-btn" style="display: inline-block;">
+          Manage Security Settings
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Details Grid -->
+  <div class="dashboard-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <h3>Member Since</h3>
+        <p>{{ current_user.created_at.strftime('%b %d, %Y') }}</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="color: var(--accent-emerald); background: rgba(16, 185, 129, 0.15);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <h3>Session Security</h3>
+        <p>Active & Encrypted</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon" style="color: var(--accent-cyan); background: rgba(6, 182, 212, 0.15);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <h3>Last Login</h3>
+        <p>{% if current_user.last_login %}{{ current_user.last_login.strftime('%H:%M, %b %d') }}{% else %}Just now{% endif %}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Security Information Box -->
+  <div class="card" style="margin-top: 2rem;">
+    <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; margin-bottom: 1rem;">
+      🛡️ Security Architecture Highlights
+    </h3>
+    <ul style="color: var(--text-muted); padding-left: 1.25rem; line-height: 1.8; font-size: 0.95rem;">
+      <li><strong>Session Protection:</strong> Cookie protected with <code>HttpOnly</code> and <code>SameSite=Lax</code> flags to mitigate XSS session hijacking.</li>
+      <li><strong>Password Hashing:</strong> Passwords are stored strictly as one-way salted hashes using <code>Werkzeug.security</code> (Scrypt/PBKDF2).</li>
+      <li><strong>Route Authorization:</strong> Protected using the Flask-Login <code>@login_required</code> decorator.</li>
+    </ul>
+  </div>
+
+</div>
+{% endblock %}
