@@ -5,7 +5,7 @@
 ![Build Status](https://img.shields.io/badge/tests-7%20passed-brightgreen.svg)
 ![License](https://img.shields.io/badge/license-MIT-informational.svg)
 
-A production-grade, secure **User Authentication & Session Management System** built with **Python (Flask)**, **SQLite**, **SQLAlchemy**, and modern **HTML5/Vanilla CSS/JS**.
+A secure authentication architecture for a learning and portfolio project built with **Python (Flask)**, **SQLite**, **SQLAlchemy**, and modern **HTML5/Vanilla CSS/JS**.
 
 Designed to showcase clean web application architecture, modern security practices (password salted hashing, CSRF tokens, ORM query parameterization), automated testing, and web development fundamentals for technical interviews and GitHub portfolios.
 
@@ -13,15 +13,16 @@ Designed to showcase clean web application architecture, modern security practic
 
 ## 🌟 Key Features
 
-- 👤 **User Registration & Validation**: Email & username uniqueness validation, alphanumeric rules, password confirmation, and input sanitization.
-- 🔑 **Secure Authentication**: Username/Email dual-identifier sign-in powered by `Flask-Login` and `Werkzeug.security`.
-- 🛡️ **Salted Password Hashing**: Passwords stored using standard one-way salted hashes (`scrypt` / `pbkdf2:sha256`). Plaintext passwords never hit the database.
-- 🔒 **Protected Routes**: Custom `@login_required` authorization decorators guarding user dashboards and settings.
+- 👤 **User Registration & Form Validation**: New users can sign up. The system checks if the email or username is already taken, ensures passwords match, and safely sanitizes input.
+- 🔑 **Secure Login & Logout**: Users can sign in using either their username or email. The `Flask-Login` library handles keeping the user logged in, managing sessions, and allowing them to securely log out.
+- 🛡️ **One-Way Password Hashing**: Passwords are never stored as plain text. We use `Werkzeug.security` to create a salted one-way hash (`scrypt` / `pbkdf2:sha256`) before saving it to the database.
+- 🔒 **Protected Dashboard**: Specific pages like the user dashboard are protected using a custom `@login_required` decorator, which blocks access unless the user is successfully logged in.
+- 💾 **Database & ORM**: Uses **SQLite** for lightweight local data storage, and **SQLAlchemy** (an Object-Relational Mapper) to interact with the database using Python instead of writing raw SQL.
 - 🍪 **Session Management & Cookie Security**: Session persistence with `HttpOnly` and `SameSite=Lax` cookies to prevent XSS session theft.
 - 🛡️ **CSRF Protection**: Form token validation using `Flask-WTF` to block Cross-Site Request Forgery attacks.
 - ⚙️ **User Profile Management**: Password update form with current password verification.
-- 🧪 **Automated Test Suite**: 100% passing unit tests using `pytest` covering auth logic, database operations, and route security.
-- 🎨 **Modern Dark UI**: Responsive glassmorphic layout with micro-animations and eye-icon password toggles.
+- 🧪 **Automated Testing**: Includes a test suite using `pytest` to automatically check if registration, login, logout, and route security are working correctly.
+- 🎨 **Modern UI**: Responsive layout with modern design elements and eye-icon password toggles.
 
 ---
 
